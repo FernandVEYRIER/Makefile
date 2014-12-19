@@ -8,7 +8,7 @@
 ## Last update Fri Dec 19 22:19:40 2014 fernand veyrier
 ##
 
-REVISION=1.2
+REVISION=1.3
 
 #Add includes, and lib
 
@@ -96,6 +96,7 @@ else if [[ $1 == "-update" ]] ; then
         mv ./Makefile_old.sh ./Makefile.sh
     else
         echo "Your Maker is up to date version $REVISION !"
+       	chmod 755 ./Makefile.sh
         rm ./Makefile_old.sh
     fi
     exit 0
