@@ -10,7 +10,7 @@
 
 REVISION=1.3
 
-#Add includes, and lib
+#Add includes
 
 function generate_makefile
 {
