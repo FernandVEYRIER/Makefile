@@ -1,11 +1,11 @@
 #!/bin/sh
-## Makefile.sh for  in /home/veyrie_f/rendu/
+## Makefile.sh for  in /home/veyrie_f/rendu/Piscine_C_J11/do-op
 ## 
 ## Made by fernand veyrier
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Fri Dec 19 21:15:27 2014 fernand veyrier
+## Last update Fri Dec 19 22:19:40 2014 fernand veyrier
 ##
 
 REVISION=1.2
@@ -89,8 +89,16 @@ then
     echo "Please enter your executable name, or -update to check for updates."
 else if [[ $1 == "-update" ]] ; then
     echo "Checking for updates..."
+    mv ./Makefile.sh ./Makefile_old.sh
+    res=$(wget https://raw.githubusercontent.com/FernandVEYRIER/Public/master/Makefile.sh)
+    if [ $? -ne 0 ] ; then
+	echo "Failed to read from repository, check internet connexion."
+	mv ./Makefile_old.sh ./Makefile.sh
+    else
+	rm ./Makefile_old.sh
+    fi
     exit 0
-fi
+else
     echo "#####################################"
     echo "# Welcome to the Maker revision $REVISION #"
     echo "#           by veyrie_f             #"
@@ -114,4 +122,5 @@ fi
         echo -n " and include."
     fi
     echo
+fi
 fi
