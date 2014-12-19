@@ -92,10 +92,11 @@ else if [[ $1 == "-update" ]] ; then
     mv ./Makefile.sh ./Makefile_old.sh
     res=$(wget https://raw.githubusercontent.com/FernandVEYRIER/Public/master/Makefile.sh)
     if [ $? -ne 0 ] ; then
-	echo "Failed to read from repository, check internet connexion."
-	mv ./Makefile_old.sh ./Makefile.sh
+        echo "Failed to read from repository, check internet connexion."
+        mv ./Makefile_old.sh ./Makefile.sh
     else
-	rm ./Makefile_old.sh
+        echo "Your Maker is up to date version $REVISION !"
+        rm ./Makefile_old.sh
     fi
     exit 0
 else
