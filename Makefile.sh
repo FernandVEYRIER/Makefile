@@ -5,12 +5,12 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Fri Dec 19 22:19:40 2014 fernand veyrier
+## Last update Sat Dec 20 00:37:34 2014 fernand veyrier
 ##
 
-REVISION=1.3
+REVISION=1.4
 
-#Add includes
+#ask for .sh path
 
 function generate_makefile
 {
@@ -73,11 +73,15 @@ function create_files
     then
         mkdir include
     fi
-    if [[ ! -f ./include/my.h ]] && [[ $2="y" ]]
+    if [[ $2="y" ]]
     then
         echo "#ifndef MY_H_" > ./include/my.h
         echo "# define MY_H_" >> ./include/my.h
         echo >> ./include/my.h
+	grep -h "^#" *.c > ./to_del.txt
+	sort ./to_del.txt | uniq >> ./include/my.h
+	rm ./to_del.txt
+	echo >> ./include/my.h
         grep -h "^[void||int||char||double||float]" *.c | sed "s/$/;/g" >> ./include/my.h #ne gere pas proto multiligne                                                                       
         echo >> ./include/my.h
         echo "#endif /* !MY_H_ */" >> ./include/my.h
