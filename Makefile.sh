@@ -102,7 +102,7 @@ else if [[ $1 == "-update" ]] ; then
         echo "Your Maker is up to date version $REVISION !"
 	mv ./Makefile.sh.1 $path
        	chmod 755 $path
-        r m ./Makefile.sh
+        rm ./Makefile.sh
     fi
     exit 0
 else
