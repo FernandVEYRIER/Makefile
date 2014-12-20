@@ -1,4 +1,3 @@
-(veyrie_f@pc-veyrie_f 70)cat Makefile.sh
 #!/bin/sh
 ## Makefile.sh for  in /home/veyrie_f/rendu/Piscine_C_J11/do-op
 ## 
