@@ -5,7 +5,7 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Sat Dec 20 13:16:12 2014 fernand veyrier
+## Last update Sat Dec 20 13:32:16 2014 fernand veyrier
 ##
 
 REVISION=1.5
@@ -93,15 +93,16 @@ else if [[ $1 == "-update" ]] ; then
     echo "Checking for updates..."
     path=$(find ~/ -name "Makefile.sh")
     echo "Makefile .sh found at location : $path"
-    mv "$path" "$path2.sh" 
+    mv $path ./
     res=$(wget https://raw.githubusercontent.com/FernandVEYRIER/Public/master/Makefile.sh)
     if [ $? -ne 0 ] ; then
         echo "Failed to read from repository, check internet connexion."
-        mv "$path2.sh" "$path"
+        mv ./Makefile.sh $path
     else
         echo "Your Maker is up to date version $REVISION !"
-       	chmod 755 "$path"
-        rm "$path2.sh"
+	mv ./Makefile.sh.1 $path
+       	chmod 755 $path
+        r m ./Makefile.sh
     fi
     exit 0
 else
