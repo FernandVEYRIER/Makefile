@@ -1,3 +1,4 @@
+(veyrie_f@pc-veyrie_f 70)cat Makefile.sh
 #!/bin/sh
 ## Makefile.sh for  in /home/veyrie_f/rendu/Piscine_C_J11/do-op
 ## 
@@ -5,12 +6,10 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Sat Dec 20 00:37:34 2014 fernand veyrier
+## Last update Sat Dec 20 13:16:12 2014 fernand veyrier
 ##
 
-REVISION=1.4
-
-#ask for .sh path
+REVISION=1.5
 
 function generate_makefile
 {
@@ -78,11 +77,11 @@ function create_files
         echo "#ifndef MY_H_" > ./include/my.h
         echo "# define MY_H_" >> ./include/my.h
         echo >> ./include/my.h
-	grep -h "^#" *.c > ./to_del.txt
-	sort ./to_del.txt | uniq >> ./include/my.h
-	rm ./to_del.txt
+	#grep -h "^#" *.c > ./to_del.txt
+	#sort ./to_del.txt | uniq >> ./include/my.h #useless
+	#rm ./to_del.txt
 	echo >> ./include/my.h
-        grep -h "^[void||int||char||double||float]" *.c | sed "s/$/;/g" >> ./include/my.h #ne gere pas proto multiligne                                                                       
+        grep -h "^[void||int||char||double||float]" *.c | sed "s/$/;/g" >> ./include/my.h #ne gere pas proto multiligne
         echo >> ./include/my.h
         echo "#endif /* !MY_H_ */" >> ./include/my.h
     fi
@@ -93,15 +92,17 @@ then
     echo "Please enter your executable name, or -update to check for updates."
 else if [[ $1 == "-update" ]] ; then
     echo "Checking for updates..."
-    mv ./Makefile.sh ./Makefile_old.sh
+    path=$(find ~/ -name "Makefile.sh")
+    echo "Makefile .sh found at location : $path"
+    mv "$path" "$path2.sh" 
     res=$(wget https://raw.githubusercontent.com/FernandVEYRIER/Public/master/Makefile.sh)
     if [ $? -ne 0 ] ; then
         echo "Failed to read from repository, check internet connexion."
-        mv ./Makefile_old.sh ./Makefile.sh
+        mv "$path2.sh" "$path"
     else
         echo "Your Maker is up to date version $REVISION !"
-       	chmod 755 ./Makefile.sh
-        rm ./Makefile_old.sh
+       	chmod 755 "$path"
+        rm "$path2.sh"
     fi
     exit 0
 else
