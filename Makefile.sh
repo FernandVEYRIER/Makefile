@@ -5,7 +5,7 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Sat Dec 20 13:32:16 2014 fernand veyrier
+## Last update Sat Dec 20 14:12:12 2014 fernand veyrier
 ##
 
 REVISION=1.5
@@ -91,18 +91,16 @@ then
     echo "Please enter your executable name, or -update to check for updates."
 else if [[ $1 == "-update" ]] ; then
     echo "Checking for updates..."
-    path=$(find ~/ -name "Makefile.sh")
+    path=$(echo -n `find ~/ -name "Makefile.sh" | sed "s/\/Makefile.sh$/$/g" | tr -d '$'`)
     echo "Makefile .sh found at location : $path"
-    mv $path ./
-    res=$(wget https://raw.githubusercontent.com/FernandVEYRIER/Public/master/Makefile.sh)
+    res=$(wget https://raw.githubusercontent.com/FernandVEYRIER/Public/master/Makefile.sh -P "$path/test/")
     if [ $? -ne 0 ] ; then
-        echo "Failed to read from repository, check internet connexion."
-        mv ./Makefile.sh $path
+        echo "Failed to read from repository, something went wrong."
     else
         echo "Your Maker is up to date version $REVISION !"
-	mv ./Makefile.sh.1 $path
-       	chmod 755 $path
-        rm ./Makefile.sh
+	mv "$path/test/Makefile.sh" $path
+       	chmod 755 "$path/Makefile.sh"
+        rm -r "$path/test"
     fi
     exit 0
 else
