@@ -1,5 +1,5 @@
-#!/bin/sh
-## Makefile.sh for  in /home/veyrie_f/rendu/Piscine_C_J11/do-op
+#!/bin/bash
+## Makefile.sh for  in /home/veyrie_f/rendu/
 ## 
 ## Made by fernand veyrier
 ## Login   <veyrie_f@epitech.net>
@@ -8,7 +8,7 @@
 ## Last update Sat Dec 20 14:12:12 2014 fernand veyrier
 ##
 
-REVISION=1.5
+REVISION=1.6
 
 function generate_makefile
 {
