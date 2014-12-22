@@ -1,11 +1,11 @@
 #!/bin/bash
-## Makefile.sh for  in /home/veyrie_f/rendu/
+## Makefile.sh for  in /home/veyrie_f/rendu/Piscine_C_J11/do-op
 ## 
 ## Made by fernand veyrier
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Sat Dec 20 14:12:12 2014 fernand veyrier
+## Last update Mon Dec 22 17:24:50 2014 fernand veyrier
 ##
 
 REVISION=1.6
@@ -75,10 +75,9 @@ function create_files
     then
         echo "#ifndef MY_H_" > ./include/my.h
         echo "# define MY_H_" >> ./include/my.h
-        echo >> ./include/my.h
-	#grep -h "^#" *.c > ./to_del.txt
-	#sort ./to_del.txt | uniq >> ./include/my.h #useless
-	#rm ./to_del.txt
+	grep -h "^#include[[:space:]\{0, 10\}]\"" *.c | sed "s/#include \"my.h\"/$/g" | tr -d "$" > ./to_del.txt
+	sort ./to_del.txt | uniq >> ./include/my.h
+	rm ./to_del.txt
 	echo >> ./include/my.h
         grep -h "^[void||int||char||double||float]" *.c | sed "s/$/;/g" >> ./include/my.h #ne gere pas proto multiligne
         echo >> ./include/my.h
