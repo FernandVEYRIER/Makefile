@@ -5,10 +5,10 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Mon Dec 22 17:24:50 2014 fernand veyrier
+## Last update Mon Dec 22 17:36:44 2014 fernand veyrier
 ##
 
-REVISION=1.6
+REVISION=1.7
 
 function generate_makefile
 {
@@ -75,7 +75,7 @@ function create_files
     then
         echo "#ifndef MY_H_" > ./include/my.h
         echo "# define MY_H_" >> ./include/my.h
-	grep -h "^#include[[:space:]\{0, 10\}]\"" *.c | sed "s/#include \"my.h\"/$/g" | tr -d "$" > ./to_del.txt
+	ls -1 ./include/ | sed "s/^/#include \"/g" | sed "s/$/\"/g" | sed "s/#include \"my.h\"/$/g" | tr -d "$" > ./to_del.txt
 	sort ./to_del.txt | uniq >> ./include/my.h
 	rm ./to_del.txt
 	echo >> ./include/my.h
