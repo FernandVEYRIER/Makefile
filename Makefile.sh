@@ -5,10 +5,10 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Mon Jan  5 13:10:41 2015 fernand veyrier
+## Last update Mon Jan  5 23:02:58 2015 fernand veyrier
 ##
 
-REVISION=1.8
+REVISION=2.0
 
 function include_header
 {
@@ -104,7 +104,7 @@ function generate_makefile
 function create_files
 {
     generate_makefile $1 $3
-    if [ ! -f ./include ]
+    if [[ ! -d ./include ]]
     then
         mkdir include
     fi
@@ -116,9 +116,14 @@ function create_files
         echo "# define MY_H_" >> ./include/my.h
 	ls -1 ./include/ | sed "s/^/#include \"/g" | sed "s/$/\"/g" | sed "s/#include \"my.h\"/$/g" | tr -d "$" > ./to_del.txt
 	sort ./to_del.txt | uniq >> ./include/my.h
+	if [[ `cat ./to_del.txt` != "" ]] ; then
+	    echo >> ./include/my.h
+	fi
 	rm ./to_del.txt
-	echo >> ./include/my.h
-        grep -h "^[void||int||char||double||float]" *.c | sed "s/$/;/g" >> ./include/my.h #ne gere pas proto multiligne
+	grep -zo -h -E "^[[:alnum:]_]+[[:space:]*]+[[:alnum:]_]+[[:space:]]*\\([][[:alnum:]' '_*,]*[,)]*(|[[:space:]]*[[:alnum:]_*,)]+)*" *.c | sed "s/)$/);/g" >> ./include/my.h
+	if [[ -d ./lib ]] ; then
+	    grep -h -E "^[[:alnum:]_]+[[:space:]*]+[[:alnum:]_]+[[:space:]]*\\(" ./lib/*.c | sed "s/$/;/g" >> ./include/my.h
+	fi
         echo >> ./include/my.h
         echo "#endif /* !MY_H_ */" >> ./include/my.h
     fi
@@ -145,8 +150,8 @@ else
     echo "#####################################"
     echo "# Welcome to the Maker revision $REVISION #"
     echo "#           by veyrie_f             #"
-    printf "#\e[31m DO NOT FORGET TO ADD YOUR HEADER \e[0m #\n"
-    printf "#\e[31m AND STRUCTURES IN MY.H IF NEEDED \e[0m #\n"
+    printf "#\e[31m         AND SO BEGINS A          \e[0m #\n"
+    printf "#\e[31m      NEW AGE OF KNOWLEDGE        \e[0m #\n"
     echo "#####################################"
     response_my="y"
     response_make="y"
