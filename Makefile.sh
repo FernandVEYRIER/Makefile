@@ -5,7 +5,7 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Mon Jan  5 23:02:58 2015 fernand veyrier
+## Last update Tue Jan  6 14:42:53 2015 fernand veyrier
 ##
 
 REVISION=2.0
@@ -13,7 +13,9 @@ REVISION=2.0
 function include_header
 {
     login=$(whoami)
-    name=$(cat /etc/passwd | grep `whoami` | grep -o -E ":[[:alpha:]' ']+:/" | tr -d ':' | tr -d '/')
+    #name=$(cat /etc/passwd | grep `whoami` | grep -o -E ":[[:alpha:]' ']+:/" | tr -d ':' | tr -d '/')
+    name=$(cat /etc/passwd | grep `whoami` | cut -d ':' -f5)
+    #Credits goes to agor_m...
     date=$(date | grep -o -E "^[[:alpha:]' ']+[[:digit:]]+[[:digit:]' ':]+")
     year=$(date | grep -o -E "[[:digit:]]+$")
     echo "/*" >> ./include/my.h
@@ -31,7 +33,9 @@ function include_header
 function makefile_header
 {
     login=$(whoami)
-    name=$(cat /etc/passwd | grep `whoami` | grep -o -E ":[[:alpha:]' ']+:/" | tr -d ':' | tr -d '/')
+    #name=$(cat /etc/passwd | grep `whoami` | grep -o -E ":[[:alpha:]' ']+:/" | tr -d ':' | tr -d '/')
+    name=$(cat /etc/passwd | grep `whoami` | cut -d ':' -f5)
+    #Here to...
     date=$(date | grep -o -E "^[[:alpha:]' ']+[[:digit:]]+[[:digit:]' ':]+")
     year=$(date | grep -o -E "[[:digit:]]+$")
     echo "##" >> Makefile
