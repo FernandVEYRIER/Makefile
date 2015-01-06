@@ -5,10 +5,10 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Tue Jan  6 16:45:55 2015 fernand veyrier
+## Last update Tue Jan  6 17:24:38 2015 fernand veyrier
 ##
 
-REVISION=2.1
+REVISION=1.0
 
 function include_header
 {
@@ -140,18 +140,18 @@ else if [[ $1 == "-update" ]] ; then
     echo "Checking for updates..."
     path=$(echo -n `find ~/ -name "Makefile.sh" | sed "s/\/Makefile.sh$/$/g" | tr -d '$'`)
     echo "Makefile .sh found at location : $path"
+    dl_version=$(w3m https://raw.githubusercontent.com/FernandVEYRIER/Public/master/Makefile.sh -dump | grep "^REVISION" | cut -d '=' -f2)
+    if [[ "$dl_version" = "$REVISION" ]] ; then
+	echo "Your Maker is already up-to-date version $REVISION"
+	exit 0
+    fi
     res=$(wget -q https://raw.githubusercontent.com/FernandVEYRIER/Public/master/Makefile.sh -P "$path/test/")
     if [ $? -ne 0 ] ; then
         echo "Failed to read from repository, something went wrong."
     else
 	echo "Checking current version..."
 	dl_version=$(grep "^REVISION" $path/test/Makefile.sh | cut -d '=' -f2)
-	old_version=$(grep "^REVISION" $path/Makefile.sh | cut -d '=' -f2)
-	if [[ "$dl_version" = "$old_version" ]] ; then
-	    echo "Your Maker is already up-to-date version $REVISION"
-	else
-            echo "Your Maker is now up-to-date version $REVISION !"
-	fi
+        echo "Your Maker is now up-to-date version $dl_version !"
 	mv "$path/test/Makefile.sh" $path
        	chmod 755 "$path/Makefile.sh"
         rm -r "$path/test"
