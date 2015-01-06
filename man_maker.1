@@ -12,6 +12,8 @@ Maker will help you to create a Makefile and includes very quickly, especially f
 It will also create an include directory containing a 'my.h' file with the prototypes of every function found in the C files. If any other .h file if found in 'include' file, all will be included in the 'my.h', so you wont have to include them anymore on your others C files. Moreover, it will look for a libmy.a library and link it if found.
 .PP
 -update	Looks for an update, and downloads it.
+.PP
+--install-man Installs his manual entry.
 
 .SH ERRORS
 Any files not located into the current directory or the lib directory won't be part of the protoypes, but still will be linked into the Makefile.
@@ -20,8 +22,8 @@ On update, if the network appears to be not reachable, the program will print an
 .PP
 If not enought rights are given to the bash file, commands will probably fail, and errors will be printed.
 
-.SH CREATOR
-Brought by veyrie_f.
+.SH AUTHOR
+Brought to you by veyrie_f.
 
 .SH COPYRIGHTS
 This is an Open Source project, feel free to change and redistribute it, as long as you quote it's creator. Also feel free to report bugs, misbehaviours, or any other problem encountered at fernand.veyrier@epitech.eu. Any comment is welcome.
