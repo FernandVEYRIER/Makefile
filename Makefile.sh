@@ -5,10 +5,10 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Tue Jan  6 22:12:26 2015 fernand veyrier
+## Last update Tue Jan  6 23:58:21 2015 fernand veyrier
 ##
 
-REVISION=2.2
+REVISION=2.3
 
 function include_header
 {
@@ -35,7 +35,7 @@ function makefile_header
     login=$(whoami)
     #name=$(cat /etc/passwd | grep `whoami` | grep -o -E ":[[:alpha:]' ']+:/" | tr -d ':' | tr -d '/')
     name=$(cat /etc/passwd | grep `whoami` | cut -d ':' -f5)
-    #Here to...
+    #Here too...
     date=$(date | grep -o -E "^[[:alpha:]' ']+[[:digit:]]+[[:digit:]' ':]+")
     year=$(date | grep -o -E "[[:digit:]]+$")
     echo "##" >> Makefile
@@ -124,10 +124,7 @@ function create_files
 	    echo >> ./include/my.h
 	fi
 	rm ./to_del.txt
-	grep -zo -h -E "^[[:alnum:]_]+[[:space:]*]+[[:alnum:]_]+[[:space:]]*\\([][[:alnum:]' '_*,]*[,)]*(|[[:space:]]*[[:alnum:]_*,)]+)*" *.c | sed "s/)$/);/g" >> ./include/my.h
-	if [[ -d ./lib ]] ; then
-	    grep -h -E "^[[:alnum:]_]+[[:space:]*]+[[:alnum:]_]+[[:space:]]*\\(" ./lib/*.c | sed "s/$/;/g" >> ./include/my.h
-	fi
+       	grep -zo -h -E "^[[:alnum:]_]+[[:space:]*]+[[:alnum:]_]+[[:space:]]*\\([][[:alnum:]' '_*,]*[,)]*(|[[:space:]]*[[:alnum:]._*,()]+)*" `find ./* -name "*.c"` | sed "s/)$/);/g" >> ./include/my.h
         echo >> ./include/my.h
         echo "#endif /* !MY_H_ */" >> ./include/my.h
     fi
