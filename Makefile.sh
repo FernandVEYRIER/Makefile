@@ -166,8 +166,9 @@ function install_man
     fi
     echo "You need to be sudo to install a new Manual Entry"
     sudo install -g 0 -o 0 -m 0644 man_maker.1 /usr/local/man/man1/
-    sudo gzip /usr/local/man/man1/man_maker.1
-    rm man_maker.1
+    sudo mv ./man_maker.1 /usr/local/man/man1/maker.1
+    sudo gzip /usr/local/man/man1/maker.1
+    sudo rm /usr/local/man/man1/man_maker.1
     echo "Successfully added manual."
     exit 0
 }
