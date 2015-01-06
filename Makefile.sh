@@ -8,7 +8,7 @@
 ## Last update Tue Jan  6 17:24:38 2015 fernand veyrier
 ##
 
-REVISION=1.0
+REVISION=2.1
 
 function include_header
 {
