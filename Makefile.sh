@@ -5,10 +5,10 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Tue Jan  6 21:39:50 2015 fernand veyrier
+## Last update Tue Jan  6 21:52:30 2015 fernand veyrier
 ##
 
-REVISION=2.1
+REVISION=2.2
 
 function include_header
 {
@@ -177,9 +177,20 @@ function install_man
     exit 0
 }
 
+function disp_usage
+{
+    echo "Usage : [BIN NAME] [OPTIONS]..."
+    echo
+    echo "-update          updates script to last version"
+    echo "--install-man    install manual entry"
+    echo
+    echo "Try 'man maker' for further help."
+    exit 0
+}
+
 if [ $# -eq 0 ]
 then
-    echo "Please enter your executable name, or -update to check for updates."
+    disp_usage
 else if [[ $1 == "-update" ]] ; then
     update_maker
 else if [[ $1 == "--install-man" ]]
