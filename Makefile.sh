@@ -167,9 +167,7 @@ function install_man
     else
 	echo "[OK]"
     fi
-    echo "You need to be sudo to install a new Manual Entry :"
-    read -p "Sudo password : " -s $passwd
-    echo $passwd
+    echo "You need to be sudo to install a new Manual Entry"
     sudo install -g 0 -o 0 -m 0644 man_maker.1 /usr/local/man/man1/
     sudo gzip /usr/local/man/man1/man_maker.1
     rm man_maker.1
@@ -196,7 +194,7 @@ else if [[ $1 == "-update" ]] ; then
 else if [[ $1 == "--install-man" ]]
 then
     install_man
-else
+else if [[ "{$1:0:1}" != "-" ]] ; then
     echo "#####################################"
     echo "# Welcome to the Maker revision $REVISION #"
     echo "#           by veyrie_f             #"
