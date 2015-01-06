@@ -5,7 +5,7 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Tue Jan  6 17:24:38 2015 fernand veyrier
+## Last update Tue Jan  6 21:39:50 2015 fernand veyrier
 ##
 
 REVISION=2.1
@@ -133,10 +133,8 @@ function create_files
     fi
 }
 
-if [ $# -eq 0 ]
-then
-    echo "Please enter your executable name, or -update to check for updates."
-else if [[ $1 == "-update" ]] ; then
+function update_maker
+{
     echo "Checking for updates..."
     path=$(echo -n `find ~/ -name "Makefile.sh" | sed "s/\/Makefile.sh$/$/g" | tr -d '$'`)
     echo "Makefile .sh found at location : $path"
@@ -157,6 +155,36 @@ else if [[ $1 == "-update" ]] ; then
         rm -r "$path/test"
     fi
     exit 0
+}
+
+function install_man
+{
+    echo -n "Fetching man data..."
+    wget -q https://raw.githubusercontent.com/FernandVEYRIER/Public/master/man_maker.1
+    if [ $? -ne 0 ] ; then
+	echo "[FAILED]"
+	exit -1
+    else
+	echo "[OK]"
+    fi
+    echo "You need to be sudo to install a new Manual Entry :"
+    read -p "Sudo password : " -s $passwd
+    echo $passwd
+    sudo install -g 0 -o 0 -m 0644 man_maker.1 /usr/local/man/man1/
+    sudo gzip /usr/local/man/man1/man_maker.1
+    rm man_maker.1
+    echo "Successfully added manual."
+    exit 0
+}
+
+if [ $# -eq 0 ]
+then
+    echo "Please enter your executable name, or -update to check for updates."
+else if [[ $1 == "-update" ]] ; then
+    update_maker
+else if [[ $1 == "--install-man" ]]
+then
+    install_man
 else
     echo "#####################################"
     echo "# Welcome to the Maker revision $REVISION #"
@@ -181,5 +209,6 @@ else
         echo -n " and include."
     fi
     echo
+fi
 fi
 fi
