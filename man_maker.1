@@ -1,4 +1,4 @@
-.TH man 1 "05 Jan 2015" "1.0" "Maker Man Page"
+.TH man 1 "05 Jan 2015" "1.1" "Maker Man Page"
 
 .SH NAME
 maker - creates a Makefile and a .h file for C code files.
@@ -11,14 +11,14 @@ Maker will help you to create a Makefile and includes very quickly, especially f
 .PP 
 It will also create an include directory containing a 'my.h' file with the prototypes of every function found in the C files. If any other .h file if found in 'include' file, all will be included in the 'my.h', so you wont have to include them anymore on your others C files. Moreover, it will look for a libmy.a library and link it if found.
 .PP
--update	Looks for an update, and downloads it.
+-update	         Looks for an update, and downloads it.
 .PP
---install-man Installs his manual entry.
+--install-man    Installs this manual entry.
 .PP
--help Displays help.
+-help            Displays help.
 
 .SH ERRORS
-Any files not located into the current directory or the lib directory won't be part of the protoypes, but still will be linked into the Makefile.
+Some particulars prototypes sometimes do not match with the pattern given. Report bugs if so.
 .PP
 On update, if the network appears to be not reachable, the program will print an error and exit.
 .PP
