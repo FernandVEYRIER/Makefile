@@ -147,10 +147,10 @@ else if [[ $1 == "-update" ]] ; then
 	echo "Checking current version..."
 	dl_version=$(grep "^REVISION" $path/test/Makefile.sh | cut -d '=' -f2)
 	old_version=$(grep "^REVISION" $path/Makefile.sh | cut -d '=' -f2)
-	if [[ $dl_version=$old_version ]] ; then
+	if [[ "$dl_version" = "$old_version" ]] ; then
 	    echo "Your Maker is already up-to-date version $REVISION"
 	else
-            echo "Your Maker is nom up-to-date version $REVISION !"
+            echo "Your Maker is now up-to-date version $REVISION !"
 	fi
 	mv "$path/test/Makefile.sh" $path
        	chmod 755 "$path/Makefile.sh"
