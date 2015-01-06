@@ -5,7 +5,7 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Tue Jan  6 21:52:30 2015 fernand veyrier
+## Last update Tue Jan  6 22:12:26 2015 fernand veyrier
 ##
 
 REVISION=2.2
@@ -186,7 +186,7 @@ function disp_usage
     exit 0
 }
 
-if [ $# -eq 0 ]
+if [ $# -eq 0 ] || [[ "$1" == "--help" ]]
 then
     disp_usage
 else if [[ $1 == "-update" ]] ; then
@@ -194,7 +194,7 @@ else if [[ $1 == "-update" ]] ; then
 else if [[ $1 == "--install-man" ]]
 then
     install_man
-else if [[ "{$1:0:1}" != "-" ]] ; then
+else if [[ "${1:0:1}" != "-" ]] ; then
     echo "#####################################"
     echo "# Welcome to the Maker revision $REVISION #"
     echo "#           by veyrie_f             #"
@@ -218,6 +218,12 @@ else if [[ "{$1:0:1}" != "-" ]] ; then
         echo -n " and include."
     fi
     echo
+else
+    echo "Unrecognized command $1"
+    echo "Type maker --help for more information."
+    echo
+    exit -1
+fi
 fi
 fi
 fi
