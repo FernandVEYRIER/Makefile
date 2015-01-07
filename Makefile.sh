@@ -5,17 +5,16 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Tue Jan  6 23:58:21 2015 fernand veyrier
+## Last update Wed Jan  7 23:42:09 2015 fernand veyrier
 ##
 
-REVISION=2.3
+REVISION=2.4
 
 function include_header
 {
     login=$(whoami)
     #name=$(cat /etc/passwd | grep `whoami` | grep -o -E ":[[:alpha:]' ']+:/" | tr -d ':' | tr -d '/')
     name=$(cat /etc/passwd | grep `whoami` | cut -d ':' -f5)
-    #Credits goes to agor_m...
     date=$(date | grep -o -E "^[[:alpha:]' ']+[[:digit:]]+[[:digit:]' ':]+")
     year=$(date | grep -o -E "[[:digit:]]+$")
     echo "/*" >> ./include/my.h
@@ -35,7 +34,6 @@ function makefile_header
     login=$(whoami)
     #name=$(cat /etc/passwd | grep `whoami` | grep -o -E ":[[:alpha:]' ']+:/" | tr -d ':' | tr -d '/')
     name=$(cat /etc/passwd | grep `whoami` | cut -d ':' -f5)
-    #Here too...
     date=$(date | grep -o -E "^[[:alpha:]' ']+[[:digit:]]+[[:digit:]' ':]+")
     year=$(date | grep -o -E "[[:digit:]]+$")
     echo "##" >> Makefile
@@ -65,7 +63,12 @@ function generate_makefile
 	echo -n "SRCS		= " >> Makefile
 	find ./ -name "*.c" | sed -e "s/\.\//$/g" | tr -d "$" > to_del
 	if [[ `cat to_del` == "" ]] ; then
-	    printf "\e[33mWarning : no .c files seems to be here.\e[0m\n"
+	    printf "\e[33mWarning : no .c files seems to be here, aborting.\e[0m\n"
+	    exit -1
+	fi
+	if [ ! -f ./to_del ] ; then
+	    echo "Last command failed, exit"
+	    exit -1
 	fi
 	while read line
 	do
@@ -89,7 +92,7 @@ function generate_makefile
 	fi
 	echo "\$(NAME):	\$(OBJS)" >> Makefile
 	echo >> Makefile
-	echo "		\$(CC) -o \$(NAME) \$(OBJS) \$(LIB)" >> Makefile
+	echo "		\$(CC) -o \$(NAME) \$(OBJS) \$(LIB) $3" >> Makefile
 	echo >> Makefile
 	echo "all:		\$(NAME)" >> Makefile
 	echo >> Makefile
@@ -107,12 +110,12 @@ function generate_makefile
 
 function create_files
 {
-    generate_makefile $1 $3
+    generate_makefile $1 $3 $4
     if [[ ! -d ./include ]]
     then
         mkdir include
     fi
-    if [[ $2="y" ]]
+    if [[ "${2:0:1}" == "y" ]]
     then
 	rm ./include/my.h
 	include_header
@@ -147,6 +150,7 @@ function update_maker
 	echo "Checking current version..."
 	dl_version=$(grep "^REVISION" $path/test/Makefile.sh | cut -d '=' -f2)
         echo "Your Maker is now up-to-date version $dl_version !"
+	echo "Do not forget to run --install-man to update the manual entry too"
 	mv "$path/test/Makefile.sh" $path
        	chmod 755 "$path/Makefile.sh"
         rm -r "$path/test"
@@ -179,12 +183,15 @@ function disp_usage
     echo
     echo "-update          updates script to last version"
     echo "--install-man    install manual entry"
-    echo
+    echo "-help            displays this help"
+    echo "-l               allows you to add your own libs to the Makefile"
+    echo "                 refer to the manual for more informations"
+    echo 
     echo "Try 'man maker' for further help."
     exit 0
 }
 
-if [ $# -eq 0 ] || [[ "$1" == "--help" ]]
+if [ $# -eq 0 ] || [[ "$1" == "-help" ]]
 then
     disp_usage
 else if [[ $1 == "-update" ]] ; then
@@ -192,7 +199,8 @@ else if [[ $1 == "-update" ]] ; then
 else if [[ $1 == "--install-man" ]]
 then
     install_man
-else if [[ "${1:0:1}" != "-" ]] ; then
+else if [[ "${1:0:1}" != "-" && "$2" == "" ]] || [[ "$2" == "-l" && "$3" != "" ]]
+then
     echo "#####################################"
     echo "# Welcome to the Maker revision $REVISION #"
     echo "#           by veyrie_f             #"
@@ -207,19 +215,19 @@ else if [[ "${1:0:1}" != "-" ]] ; then
     if [ -f ./Makefile ] ; then
         read -p "A Makefile already exists. Overwrite it ? [y/n] " response_make
     fi
-    create_files $1 $response_my $response_make
+    create_files $1 $response_my $response_make $3
     echo -n "Succesfully created $1"
-    if [[ "${response_my:0:1}" == "y" ]] ; then
+    if [[ "${response_make:0:1}" == "y" ]] ; then
         echo -n " Makefile"
     fi
-    if [[ "${response_make:0:1}" == "y" ]] ; then
+    if [[ "${response_my:0:1}" == "y" ]] ; then
         echo -n " and include."
     fi
     echo
+    exit 0
 else
     echo "Unrecognized command $1"
-    echo "Type maker --help for more information."
-    echo
+    echo "Type maker -help for more information."
     exit -1
 fi
 fi
