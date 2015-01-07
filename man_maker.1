@@ -16,11 +16,17 @@ It will also create an include directory containing a 'my.h' file with the proto
 --install-man    Installs this manual entry.
 .PP
 -help            Displays help.
+.PP
+-l               Allow you to add extra lib links to the Makefile. Usage becomes [BIN] -l [LIB]
+.PP
+                 It is VERY important to add al the libs you want in ONE SINGLE string with spaces between each lib, or next arguments will be ignored.
 
 .SH RETURN VALUES
 -1 : on update, if the network appears to be not reachable, the program will print an error and exit.
 .PP
 -1 : if not enought rights are given to the bash file, commands will probably fail, and errors will be printed.
+.PP
+-2 : if no C files are encountered, a warning is displayed and the program exits.
 .PP
  0 : if all went normally. 
 
