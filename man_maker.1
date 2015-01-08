@@ -1,4 +1,4 @@
-.TH man 1 "05 Jan 2015" "1.1" "Maker Man Page"
+.TH man 1 "05 Jan 2015" "1.2" "Maker Man Page"
 
 .SH NAME
 maker - creates a Makefile and a .h file for C code files.
@@ -26,9 +26,11 @@ It will also create an include directory containing a 'my.h' file with the proto
 .PP
 -1 : if not enought rights are given to the bash file, commands will probably fail, and errors will be printed.
 .PP
+-1 : if the name matches with the pattern *.c, it is considered as an invalid binary name to avoid any make problems.
+.PP
 -2 : if no C files are encountered, a warning is displayed and the program exits.
 .PP
- 0 : if all went normally. 
+ 0 : if all went normally.
 
 .SH BUGS
 Some particulars prototypes sometimes do not match with the pattern given. Report bugs if so.
