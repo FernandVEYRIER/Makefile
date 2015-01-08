@@ -5,10 +5,10 @@
 ## Login   <veyrie_f@epitech.net>
 ## 
 ## Started on  Mon Oct 20 13:05:25 2014 fernand veyrier
-## Last update Wed Jan  7 23:42:09 2015 fernand veyrier
+## Last update Thu Jan  8 10:59:01 2015 fernand veyrier
 ##
 
-REVISION=2.4
+REVISION=2.5
 
 function include_header
 {
@@ -209,6 +209,10 @@ then
     echo "#####################################"
     response_my="y"
     response_make="y"
+    if [[ `echo $1 | grep ".c"` != "" ]] ; then
+	echo "Your bin name cannot be *.c, exit"
+	exit -1
+    fi
     if [ -f ./include/my.h ] ; then
         read -p "A my.h file already exists. Overwrite it ? [y/n] " response_my
     fi
