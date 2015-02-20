@@ -18,7 +18,7 @@ function include_header
     date=$(date | grep -o -E "^[[:alpha:]' ']+[[:digit:]]+[[:digit:]' ':]+")
     year=$(date | grep -o -E "[[:digit:]]+$")
     echo "/*" >> ./include/my.h
-    echo "** Makefile for  in $PWD" >> ./include/my.h
+    echo "** my.h for  in $PWD" >> ./include/my.h
     echo "**" >> ./include/my.h
     echo "** Made by $name" >> ./include/my.h
     echo "** Login   <$login@epitech.net>" >> ./include/my.h
