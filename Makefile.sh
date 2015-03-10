@@ -8,7 +8,7 @@
 ## Last update Thu Jan  8 10:59:01 2015 fernand veyrier
 ##
 
-REVISION=2.6
+REVISION=2.7
 
 function include_header
 {
@@ -209,7 +209,7 @@ then
     echo "#####################################"
     response_my="y"
     response_make="y"
-    if [[ `echo $1 | grep ".c"` != "" ]] ; then
+    if [[ `echo $1 | grep "\.c"` != "" ]] ; then
 	echo "Your bin name cannot be *.c, exit"
 	exit -1
     fi
