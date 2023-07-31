@@ -1,7 +1,3 @@
-Public
-======
-
-Contains public scripts, for fck sake
 Makefile.sh
 ===========
 
